@@ -1,6 +1,6 @@
 # style-guide for Next v16 & TW v4
 
-A Next/TS/TW style guide based on the retired Vercel Style Guide. **_This is for Next v16 and TW v4 as different setup is needed for newer versions of Next and TW_**.
+A Next/TS/TW style guide based on the retired Vercel Style Guide. **_This is for Next v16 and TW v4 as different setup is needed for other versions of Next and TW_**.
 
 This is only a framework to bootstrap linting and code formatting. More-than-likely more work will need to be done to get this working in a codebase. This style guide was created because Vercel has retired their style guide and have not updated it to work with the new eslint flat config.
 
