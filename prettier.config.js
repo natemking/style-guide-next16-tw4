@@ -12,7 +12,7 @@ const config = {
     singleAttributePerLine: true,
     endOfLine: 'lf',
     plugins: ['prettier-plugin-packagejson', 'prettier-plugin-tailwindcss'],
-    tailwindStylesheet: './app/globals.css',
+    tailwindStylesheet: './src/app/globals.css',
     tailwindFunctions: ['clsx', 'cn'],
 };
 
