@@ -54,7 +54,7 @@ const eslintConfig = defineConfig([
                 version: 'detect',
             },
             'better-tailwindcss': {
-                entryPoint: './app/globals.css',
+                entryPoint: './src/app/globals.css',
             },
         },
         plugins: {

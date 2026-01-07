@@ -20,6 +20,8 @@ The following eslint packages & plugins need installed as dev dependencies:
 -   eslint-plugin-unicorn
 -   typescript-eslint
 
+Make sure your better-tailwindcss `entryPoint` path is correct in your `eslint.config.js`! 
+
 ## Prettier
 
 Use the `prettier.config.js` & `.prettierignore` file in the root of your project.
