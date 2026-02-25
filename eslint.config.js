@@ -302,7 +302,7 @@ const eslintConfig = defineConfig([
             /** No duplicate classes in tailwindcss class strings. */
             'better-tailwindcss/no-duplicate-classes': 'error',
             /** No unregistered classes. */
-            'better-tailwindcss/no-unregistered-classes': [
+            'better-tailwindcss/no-unknown-classes': [
                 'warn',
                 { detectComponentClasses: true, ignore: ['mc\\-(.+)'] },
             ],

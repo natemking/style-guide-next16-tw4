@@ -57,6 +57,9 @@ Make sure to include your config files in the `tsconfig.json`:
 pnpm add -D @eslint-community/eslint-plugin-eslint-comments @eslint/js eslint eslint-config-next eslint-config-prettier eslint-plugin-better-tailwindcss eslint-plugin-tsdoc eslint-plugin-unicorn typescript-eslint prettier prettier-plugin-packagejson prettier-plugin-tailwindcss
 ```
 
+### Troubleshooting
+If after applying to your project and linting is not happening, run `npx eslint .` from the root as there may be errors. The packages installed may be different form the time this was initially setup and breaking changes could have occurred. 
+
 ## Future Additions
 
 ### eslint/css
