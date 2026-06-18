@@ -250,7 +250,7 @@ const eslintConfig = defineConfig([
             /** Require use of an object spread over Object.assign. */
             'prefer-object-spread': 'warn',
             /** Prefer single quotes (allow double quotes if it avoids escaping a char) */
-           quotes: ['error', 'single', { avoidEscape: true }],
+            quotes: ['error', 'single', { avoidEscape: true }],
 
             /** REACT */
             /**  use TS over `prop-types`, as it can add to a project's build size. */
@@ -509,7 +509,7 @@ const eslintConfig = defineConfig([
     },
     {
         /** ShadCN rule overrides – styles governed outside our style guide */
-        files: ['**/shadcn/*.{jsx,tsx}'],
+        files: ['**/shadcn/**/*.{jsx,tsx}'],
         rules: {
             '@typescript-eslint/consistent-type-definitions': 'off',
             '@typescript-eslint/explicit-function-return-type': 'off',
