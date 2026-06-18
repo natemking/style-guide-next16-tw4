@@ -477,13 +477,27 @@ const eslintConfig = defineConfig([
     },
     {
         /** Allow default exports in certain files that require them */
-           files: [
+        files: [
+            // Next.js App Router special files
+            '**/default.{jsx,tsx}',
             '**/error.{jsx,tsx}',
             '**/global-error.{jsx,tsx}',
             '**/layout.{jsx,tsx}',
             '**/loading.{jsx,tsx}',
             '**/not-found.{jsx,tsx}',
             '**/page.{jsx,tsx}',
+            '**/route.{js,ts}',
+            '**/template.{jsx,tsx}',
+            // Next.js metadata files
+            '**/apple-icon.{js,jsx,ts,tsx}',
+            '**/icon.{js,jsx,ts,tsx}',
+            '**/instrumentation.{js,ts}',
+            '**/manifest.{js,ts}',
+            '**/opengraph-image.{js,jsx,ts,tsx}',
+            '**/robots.{js,ts}',
+            '**/sitemap.{js,ts}',
+            '**/twitter-image.{js,jsx,ts,tsx}',
+            // Other
             '**/middleware.{js,ts}',
             '**/proxy.{js,ts}',
             '**/*.config.{js,ts,cjs,cts,mjs,mts}',
