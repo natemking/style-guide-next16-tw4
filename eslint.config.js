@@ -360,10 +360,7 @@ const eslintConfig = defineConfig([
                 { ignoreStringArrays: true },
             ],
             /** Require exhaustive checks when using union types in switch statements. */
-            '@typescript-eslint/switch-exhaustiveness-check': [
-                'error',
-                { considerDefaultExhaustiveForUnions: true },
-            ],
+            '@typescript-eslint/switch-exhaustiveness-check': 'error',
             /** Require default parameters to be last. */
             '@typescript-eslint/default-param-last': 'error',
             /** Disallow creation of functions within loops. */
