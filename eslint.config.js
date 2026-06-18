@@ -5,7 +5,6 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import commentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import betterTailwindPlugin from 'eslint-plugin-better-tailwindcss';
-import tsdocPlugin from 'eslint-plugin-tsdoc';
 import unicornPlugin from 'eslint-plugin-unicorn';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
@@ -61,7 +60,6 @@ const eslintConfig = defineConfig([
         plugins: {
             '@eslint-community/eslint-comments': commentsPlugin,
             'better-tailwindcss': betterTailwindPlugin,
-            tsdoc: tsdocPlugin,
             unicorn: unicornPlugin,
         },
         rules: {
@@ -402,10 +400,6 @@ const eslintConfig = defineConfig([
                     allowNever: true,
                 },
             ],
-
-            /** TSDOC */
-            /** Require TSDoc comments conform to the TSDoc specification. */
-            'tsdoc/syntax': 'error',
 
             /** UNICORN */
             /** Require an error message when throwing an error. */
