@@ -340,7 +340,7 @@ const eslintConfig = defineConfig([
                     format: ['PascalCase'],
                     selector: ['typeLike', 'enumMember'],
                 },
-                // Types cannot be prefixed with `T`, 'I', or use restricted names.
+                // Disallow Hungarian notation prefixes (TFoo, IFoo) and overly generic standalone names (Interface, Props, State).
                 {
                     custom: {
                         match: false,
