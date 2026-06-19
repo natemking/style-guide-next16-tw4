@@ -539,6 +539,9 @@ const eslintConfig = defineConfig([
     {
         files: ['**/*.config.{js,mjs,cjs}'],
         extends: [tseslint.configs.disableTypeChecked],
+        rules: {
+            '@typescript-eslint/explicit-function-return-type': 'off',
+        },
     },
     eslintConfigPrettier,
 ]);

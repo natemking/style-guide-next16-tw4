@@ -2,13 +2,13 @@
 
 A Next/TS/TW style guide based on the retired Vercel Style Guide. **_This is for Next v16 and TW v4 as different setup is needed for other versions of Next and TW_**.
 
-This is only a framework to bootstrap linting and code formatting. More-than-likely more work will need to be done to get this working in a codebase. This style guide was created because Vercel has retired their style guide and have not updated it to work with the new eslint flat config.
+A complete linting and formatting setup for new Next.js projects. Run the setup script, update two paths, and you're done. Built because Vercel retired their style guide without updating it for ESLint flat config.
 
 ## Eslint
 
-This is based off the new eslint flat config. Use the `eslint.config.mjs` file inside the root of your project. This file utilizes many of the below packages recommend settings as well as custom rules.
+Based on the new ESLint flat config. The `eslint.config.mjs` file is copied into your project root by the setup script and utilizes the packages below with recommended settings and custom rules.
 
-The following eslint packages & plugins need installed as dev dependencies:
+The following ESLint packages & plugins are installed as dev dependencies:
 
 -   @eslint-community/eslint-plugin-eslint-comments
 -   @eslint/js
@@ -26,7 +26,7 @@ Make sure your better-tailwindcss `entryPoint` path is correct in your `eslint.c
 
 `eslint-config-next` bundles `eslint-plugin-import` which does not support ESLint 10. This config patches it out at runtime in favor of `eslint-plugin-import-x`, a drop-in replacement that supports ESLint 10. No rule changes are needed — all `import/*` rules work identically.
 
-> **Note:** Until `eslint-config-next` officially supports ESLint 10, you will see peer dependency warnings on install. These are harmless — everything works correctly. Track progress at [vercel/next.js#91702](https://github.com/vercel/next.js/issues/91702).
+> **Note:** Until `eslint-config-next` officially supports ESLint 10, you will see peer dependency warnings on install. These are harmless — everything works correctly.
 
 ### ShadCN
 
@@ -34,9 +34,9 @@ The config applies relaxed rules to files under any `shadcn/` directory (`**/sha
 
 ## Prettier
 
-Use the `prettier.config.mjs` & `.prettierignore` file in the root of your project.
+The `prettier.config.mjs` & `.prettierignore` files are copied into your project root by the setup script.
 
-The following Prettier packages & plugins need installed as dev dependencies:
+The following Prettier packages & plugins are installed as dev dependencies:
 
 -   prettier
 -   prettier-plugin-packagejson
@@ -45,11 +45,12 @@ The following Prettier packages & plugins need installed as dev dependencies:
 Make sure your `tailwindStylesheet` path is correct in your `prettier.config.mjs`!
 
 ## Package.json
-Make sure to add `"type": "module"` to your package.json. You may need to make sure all of your config & other files are in ESM syntax but since Next v14 this is now supported.
+
+The setup script automatically adds `"type": "module"` to your `package.json`. All config files use ESM syntax, which has been supported since Next v14. If setting up manually, add this yourself.
 
 ## Typescript config
 
-Make sure TypeScript is installed (`typescript` dev dependency) and include your config files in `tsconfig.json`:
+The setup script automatically patches `tsconfig.json` with the required include entries. If setting up manually, make sure these are present:
 
 ```
 "include": [
@@ -67,21 +68,35 @@ Make sure TypeScript is installed (`typescript` dev dependency) and include your
 
 ## Setup
 
-Run the setup script from your new project's root to copy all config files, patch `package.json` and `tsconfig.json`, and install dependencies in one step:
+Run the setup script from your new project's root, pointing to wherever you cloned this repo:
 
 ```
-node ~/dev/style-guide-next16-tw4/setup.ts .
+node /path/to/style-guide-next16-tw4/setup.ts .
 ```
 
-Or with an explicit path:
+Or pass the target directory explicitly:
 
 ```
-node ~/dev/style-guide-next16-tw4/setup.ts ~/dev/my-new-project
+node /path/to/style-guide-next16-tw4/setup.ts /path/to/my-new-project
 ```
+
+The script will:
+- Copy `eslint.config.mjs`, `prettier.config.mjs`, and `.prettierignore`
+- Patch `package.json` with `"type": "module"`
+- Patch `tsconfig.json` with the required include entries
+- Install all dependencies
+- Optionally install pre-commit hooks (Husky + lint-staged) — defaults to yes
 
 After running, update the two hardcoded paths:
-- `eslint.config.mjs` → `better-tailwindcss` entryPoint (~line 58)
+- `eslint.config.mjs` → `better-tailwindcss` entryPoint (~line 67)
 - `prettier.config.mjs` → `tailwindStylesheet` path
+
+### Pre-commit hooks
+
+If you opted in, the setup installs Husky with a pre-commit hook that:
+- Runs `tsc --noEmit` to catch type errors
+- On your first commit after setup, runs Prettier and ESLint across the entire project
+- On all subsequent commits, runs lint-staged (staged files only)
 
 ### Manual install
 
@@ -91,8 +106,11 @@ If you prefer to copy files yourself, install dependencies with:
 pnpm add -D @eslint-community/eslint-plugin-eslint-comments @eslint/js eslint eslint-config-next eslint-config-prettier eslint-plugin-better-tailwindcss eslint-plugin-import-x eslint-plugin-unicorn typescript-eslint prettier prettier-plugin-packagejson prettier-plugin-tailwindcss
 ```
 
+You will also need to manually apply the Package.json and TypeScript config changes described above.
+
 ### Troubleshooting
-If after applying to your project and linting is not happening, run `npx eslint .` from the root as there may be errors. The packages installed may be different from the time this was initially setup and breaking changes could have occurred.
+
+If linting is not working after setup, run `npx eslint .` from the project root — there may be config errors in the output. Package versions may have changed since this was last tested and breaking changes could have occurred.
 
 ## Future Additions
 
