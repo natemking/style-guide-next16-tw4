@@ -12,12 +12,14 @@ The following ESLint packages & plugins are installed as dev dependencies:
 
 -   @eslint-community/eslint-plugin-eslint-comments
 -   @eslint/js
+-   @eslint/css
 -   eslint
 -   eslint-config-next
 -   eslint-config-prettier
 -   eslint-plugin-better-tailwindcss
 -   eslint-plugin-import-x
 -   eslint-plugin-unicorn
+-   tailwind-csstree
 -   typescript-eslint
 
 Make sure your better-tailwindcss `entryPoint` path is correct in your `eslint.config.mjs`!
@@ -27,6 +29,10 @@ Make sure your better-tailwindcss `entryPoint` path is correct in your `eslint.c
 `eslint-config-next` bundles `eslint-plugin-import` which does not support ESLint 10. This config patches it out at runtime in favor of `eslint-plugin-import-x`, a drop-in replacement that supports ESLint 10. No rule changes are needed — all `import/*` rules work identically.
 
 > **Note:** Until `eslint-config-next` officially supports ESLint 10, you will see peer dependency warnings on install. These are harmless — everything works correctly.
+
+### CSS
+
+ESLint lints CSS files via `@eslint/css` with Tailwind v4 syntax support provided by `tailwind-csstree`. The recommended ruleset is enabled, covering invalid properties, duplicate imports, empty blocks, unmatchable selectors, and more.
 
 ### ShadCN
 
@@ -112,9 +118,3 @@ You will also need to manually apply the Package.json and TypeScript config chan
 
 If linting is not working after setup, run `npx eslint .` from the project root — there may be config errors in the output. Package versions may have changed since this was last tested and breaking changes could have occurred.
 
-## Future Additions
-
-### eslint/css
-Eslint now supports linting [CSS](https://eslint.org/blog/2025/02/eslint-css-support/) with the [@eslint/css](https://www.npmjs.com/package/@eslint/css) plugin but there are still bugs in installing it w/ pnpm and yarn as of the time of writing this. There are also a bunch of rules in the feature request pipeline. The plugin supports TW syntax as well but there is the following issue: 'The Tailwind syntax doesn't currently provide for the theme() function. This is a limitation of CSSTree that we hope will be resolved soon.'
-
-Once these initial quirks are worked out, this plugin will be fully incorporated into this style guide.

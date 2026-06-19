@@ -8,6 +8,8 @@ import betterTailwindPlugin from 'eslint-plugin-better-tailwindcss';
 import importXPlugin from 'eslint-plugin-import-x';
 import unicornPlugin from 'eslint-plugin-unicorn';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import css from '@eslint/css';
+import { tailwind4 } from 'tailwind-csstree';
 
 // eslint-config-next uses eslint-plugin-import which does not support ESLint 10.
 // Patch the next configs to swap it out for eslint-plugin-import-x before ESLint sees them.
@@ -542,6 +544,16 @@ const eslintConfig = defineConfig([
         rules: {
             '@typescript-eslint/explicit-function-return-type': 'off',
         },
+    },
+    // Lint CSS files with Tailwind v4 syntax support
+    {
+        files: ['**/*.css'],
+        language: 'css/css',
+        languageOptions: {
+            customSyntax: tailwind4,
+        },
+        plugins: { css },
+        extends: ['css/recommended'],
     },
     eslintConfigPrettier,
 ]);

@@ -58,7 +58,7 @@ if (existsSync(tsconfigPath)) {
 // Install dependencies
 console.log('\nInstalling style guide dependencies...');
 execSync(
-    'pnpm add -D @eslint-community/eslint-plugin-eslint-comments @eslint/js eslint eslint-config-next eslint-config-prettier eslint-plugin-better-tailwindcss eslint-plugin-import-x eslint-plugin-unicorn typescript-eslint prettier prettier-plugin-packagejson prettier-plugin-tailwindcss',
+    'pnpm add -D @eslint-community/eslint-plugin-eslint-comments @eslint/js @eslint/css eslint eslint-config-next eslint-config-prettier eslint-plugin-better-tailwindcss eslint-plugin-import-x eslint-plugin-unicorn tailwind-csstree typescript-eslint prettier prettier-plugin-packagejson prettier-plugin-tailwindcss',
     { cwd: target, stdio: 'inherit' }
 );
 
