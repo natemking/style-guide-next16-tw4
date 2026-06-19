@@ -6,7 +6,7 @@ This is only a framework to bootstrap linting and code formatting. More-than-lik
 
 ## Eslint
 
-This is based off the new eslint flat config. Use the `eslint.config.js` file inside the root of your project. This file utilizes many of the below packages recommend settings as well as custom rules.
+This is based off the new eslint flat config. Use the `eslint.config.mjs` file inside the root of your project. This file utilizes many of the below packages recommend settings as well as custom rules.
 
 The following eslint packages & plugins need installed as dev dependencies:
 
@@ -16,10 +16,17 @@ The following eslint packages & plugins need installed as dev dependencies:
 -   eslint-config-next
 -   eslint-config-prettier
 -   eslint-plugin-better-tailwindcss
+-   eslint-plugin-import-x
 -   eslint-plugin-unicorn
 -   typescript-eslint
 
-Make sure your better-tailwindcss `entryPoint` path is correct in your `eslint.config.js`!
+Make sure your better-tailwindcss `entryPoint` path is correct in your `eslint.config.mjs`!
+
+### Import plugin
+
+`eslint-config-next` bundles `eslint-plugin-import` which does not support ESLint 10. This config patches it out at runtime in favor of `eslint-plugin-import-x`, a drop-in replacement that supports ESLint 10. No rule changes are needed — all `import/*` rules work identically.
+
+> **Note:** Until `eslint-config-next` officially supports ESLint 10, you will see peer dependency warnings on install. These are harmless — everything works correctly. Track progress at [vercel/next.js#91702](https://github.com/vercel/next.js/issues/91702).
 
 ### ShadCN
 
@@ -27,7 +34,7 @@ The config applies relaxed rules to files under any `shadcn/` directory (`**/sha
 
 ## Prettier
 
-Use the `prettier.config.js` & `.prettierignore` file in the root of your project.
+Use the `prettier.config.mjs` & `.prettierignore` file in the root of your project.
 
 The following Prettier packages & plugins need installed as dev dependencies:
 
@@ -35,7 +42,7 @@ The following Prettier packages & plugins need installed as dev dependencies:
 -   prettier-plugin-packagejson
 -   prettier-plugin-tailwindcss
 
-Make sure your `tailwindStylesheet` path is correct in your `prettier.config.js`!
+Make sure your `tailwindStylesheet` path is correct in your `prettier.config.mjs`!
 
 ## Package.json
 Make sure to add `"type": "module"` to your package.json. You may need to make sure all of your config & other files are in ESM syntax but since Next v14 this is now supported.
@@ -50,15 +57,38 @@ Make sure TypeScript is installed (`typescript` dev dependency) and include your
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "**/*.config.js"
+    "**/*.config.js",
+    "**/*.config.mjs",
+    "**/*.config.cjs"
 ]
 ```
 
 <hr />
 
-## Install cmd
+## Setup
+
+Run the setup script from your new project's root to copy all config files, patch `package.json` and `tsconfig.json`, and install dependencies in one step:
+
 ```
-pnpm add -D @eslint-community/eslint-plugin-eslint-comments @eslint/js eslint eslint-config-next eslint-config-prettier eslint-plugin-better-tailwindcss eslint-plugin-unicorn typescript-eslint prettier prettier-plugin-packagejson prettier-plugin-tailwindcss
+node ~/dev/style-guide-next16-tw4/setup.ts .
+```
+
+Or with an explicit path:
+
+```
+node ~/dev/style-guide-next16-tw4/setup.ts ~/dev/my-new-project
+```
+
+After running, update the two hardcoded paths:
+- `eslint.config.mjs` → `better-tailwindcss` entryPoint (~line 58)
+- `prettier.config.mjs` → `tailwindStylesheet` path
+
+### Manual install
+
+If you prefer to copy files yourself, install dependencies with:
+
+```
+pnpm add -D @eslint-community/eslint-plugin-eslint-comments @eslint/js eslint eslint-config-next eslint-config-prettier eslint-plugin-better-tailwindcss eslint-plugin-import-x eslint-plugin-unicorn typescript-eslint prettier prettier-plugin-packagejson prettier-plugin-tailwindcss
 ```
 
 ### Troubleshooting

@@ -5,12 +5,22 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import commentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import betterTailwindPlugin from 'eslint-plugin-better-tailwindcss';
+import importXPlugin from 'eslint-plugin-import-x';
 import unicornPlugin from 'eslint-plugin-unicorn';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
+// eslint-config-next uses eslint-plugin-import which does not support ESLint 10.
+// Patch the next configs to swap it out for eslint-plugin-import-x before ESLint sees them.
+const patchImportPlugin = (configs) =>
+    configs.map(config =>
+        config.plugins?.import
+            ? { ...config, plugins: { ...config.plugins, import: importXPlugin } }
+            : config
+    );
+
 const eslintConfig = defineConfig([
-    ...nextVitals,
-    ...nextTs,
+    ...patchImportPlugin(nextVitals),
+    ...patchImportPlugin(nextTs),
     // Override default ignores of eslint-config-next.
     globalIgnores([
         // Default ignores of eslint-config-next:
@@ -402,7 +412,7 @@ const eslintConfig = defineConfig([
             /** Require an error message when throwing an error. */
             'unicorn/error-message': 'error',
             /** Prefer for…of over the forEach method  */
-            'unicorn/no-array-for-each': 'error',
+            'unicorn/no-for-each': 'error',
             /** Disallow unnecessary spread */
             'unicorn/no-useless-spread': 'error',
             /** Enforce proper case for numeric literals */
