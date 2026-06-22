@@ -551,6 +551,7 @@ const eslintConfig = defineConfig([
         language: 'css/css',
         languageOptions: {
             customSyntax: tailwind4,
+            tolerant: true,
         },
         plugins: { css },
         extends: ['css/recommended'],
